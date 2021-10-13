@@ -25,9 +25,6 @@ Usage: get-graphql-schema [OPTIONS] ENDPOINT_URL > schema.graphql
 
 ## Resources
 
-### Completed Example Project
-https://github.com/jscomplete/learning-graphql-and-relay
-
 ### Relay Repl
 https://relay-compiler-repl.netlify.app/
 
