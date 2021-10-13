@@ -1,0 +1,74 @@
+schema {
+  query: RootQuery
+}
+
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Quote {
+  id: String
+  text: String
+  author: String
+}
+
+"""A connection to a list of items."""
+type QuoteConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [QuoteEdge]
+}
+
+"""An edge in a connection."""
+type QuoteEdge {
+  """The item at the end of the edge"""
+  node: Quote
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type QuotesLibrary {
+  """A list of the quotes in the database"""
+  quotesConnection(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+    searchTerm: String
+  ): QuoteConnection
+}
+
+type RootQuery {
+  hello: String
+
+  """The Quotes Library"""
+  quotesLibrary: QuotesLibrary
+}
+
